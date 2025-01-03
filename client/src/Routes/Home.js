@@ -5,6 +5,7 @@ import HomeImg from '../Assests/img1.jpg';
 import '../Styles/Home.css';
 import Destination from '../Components/Destination';
 import Trip from '../Components/Trip';
+import Footer from '../Components/Footer';
 
 function Home() {
   return (
@@ -21,6 +22,7 @@ function Home() {
      />
       <Destination/>
       <Trip/>
+      <Footer/>
     </div>
   )
 }

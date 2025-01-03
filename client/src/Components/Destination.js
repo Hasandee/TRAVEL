@@ -2,6 +2,8 @@ import Sigiriya1 from '../Assests/img5.jpg';
 import Sigiriya2 from '../Assests/img6.jpg';
 import Beach1 from '../Assests/img7.jpg';
 import Beach2 from '../Assests/img8.jpg';
+import Kandy1 from '../Assests/img10.jpg';
+import Kandy2 from '../Assests/img9.jpg';
 import '../Styles/Destination.css'
 import DestinationData from './DestinationData';
 
@@ -32,8 +34,8 @@ const Destination = () => {
             className="first-des"
                 heading="Kandy - The Cultural Heart"
                 text="Kandy, nestled in the heart of Sri Lanka's hill country, is a cultural and spiritual treasure that captivates visitors with its timeless charm. At its heart lies the revered Temple of the Tooth Relic, a UNESCO World Heritage Site and one of the most sacred places of worship for Buddhists worldwide. Pilgrims and visitors alike are drawn to its rich history, intricate architecture, and the spiritual ambiance that surrounds this iconic temple.The city itself is a picturesque haven, encircled by rolling green hills and centered around the tranquil Kandy Lake, which offers a peaceful spot for leisurely strolls. Beyond its spiritual significance, Kandy boasts colonial-era architecture, bustling markets, and vibrant cultural festivals, including the famous Esala Perahera, a grand procession celebrating the sacred tooth relic.With its harmonious blend of history, spirituality, and natural beauty, Kandy offers a unique experience that lingers in the hearts of all who visit."
-                img1={Sigiriya1}
-                img2={Sigiriya2}
+                img1={Kandy1}
+                img2={Kandy2}
 
             />
 
