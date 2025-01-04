@@ -3,7 +3,7 @@ import Navbar from '../Components/Navbar';
 import Hero from '../Components/Hero';
 import AboutImg from '../Assests/img14.jpg';
 import Footer from '../Components/Footer';
-import '../Styles/About.css'; // Import the CSS styles for About
+import '../Styles/About.css'; 
 
 function About() {
   return (
@@ -13,14 +13,14 @@ function About() {
         cName="hero-mid"
         heroImg={AboutImg}
         title="Discover Sri Lanka’s Beauty and Culture"
-        btnClass="hide"
+        btnClass="hide" 
       />
       <div className="about-page">
         <h1>About ExploreLanka</h1>
         <p>
           ExploreLanka is dedicated to showcasing the unparalleled beauty, culture, and adventure that Sri Lanka has to offer. Whether you're looking to explore historical landmarks, immerse yourself in nature, or relax on pristine beaches, we provide personalized travel experiences tailored to your interests.
         </p>
-        <img src="../Assests/img15.jpg" alt="Cultural dance in Sri Lanka" />
+        <img src={require("../Assests/img15.jpeg")} alt="Cultural dance in Sri Lanka" className="responsive-img" />
         <div className="about-sections">
           <div className="section">
             <h2>Our Mission</h2>
