@@ -1,0 +1,118 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  
+  .services-overview {
+    text-align: center;
+    padding: 30px 20px;
+  }
+  
+  .services-overview h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .services-overview p {
+    color: #666;
+    font-size: 1.2rem;
+  }
+  
+  .service-features {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 50px;
+    background: #f9f9f9;
+  }
+  
+  .service-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+    width: 300px;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .service-card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+  }
+  
+  .service-card h3 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .service-card p {
+    color: #555;
+  }
+  
+  .why-choose-us {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .why-choose-us h2 {
+    margin-bottom: 20px;
+  }
+  
+  .benefits {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .benefit-item {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 250px;
+  }
+  
+  .benefit-item img {
+    width: 60px;
+    margin-bottom: 10px;
+  }
+  
+  .benefit-item h4 {
+    color: #333;
+  }
+  
+  .contact-cta {
+    text-align: center;
+    padding: 30px;
+    background: #0096c7;
+    color: #fff;
+  }
+  
+  .contact-cta h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .contact-button {
+    padding: 10px 20px;
+    background: #fff;
+    color: #0096c7;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .contact-button:hover {
+    background: #0077b6;
+    color: #fff;
+  }
+  
