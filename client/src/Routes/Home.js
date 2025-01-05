@@ -13,7 +13,7 @@ function Home() {
          <Navbar />
      <Hero 
      cName="hero"
-     heroImg={HomeImg}
+     heroImg={HomeImg}/*test6 pic*/
      title="Explore the Beauty of Sri Lanka"
      text="Discover breathtaking landscapes, vibrant culture, and unforgettable adventures."
      buttonText="Travel Plan"

@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../Components/Navbar';
 import Hero from '../Components/Hero';
-import AboutImg from '../Assests/test8.jpg';
+import AboutImg from '../Assests/img16.jpg';
 import icon1 from '../Assests/icon1.png';
 import icon2 from '../Assests/icon2.png';
 import icon3 from '../Assests/icon3.png';
@@ -9,6 +9,7 @@ import icon4 from '../Assests/icon4.png';
 import icon5 from '../Assests/icon5.png';
 import icon6 from '../Assests/icon6.png';
 import '../Styles/Services.css';
+import Footer from '../Components/Footer';
 
 function Services() {
   return (
@@ -68,11 +69,12 @@ function Services() {
         </div>
       </section>
 
-      {/* <section className="contact-cta">
+      <section className="contact-cta">
         <h2>Start Planning Your Trip Today!</h2>
         <p>Contact us to create unforgettable memories in Sri Lanka.</p>
         <button className="contact-button">Contact Us</button>
-      </section> */}
+      </section>
+      <Footer />
     </div>
   );
 }
