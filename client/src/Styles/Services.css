@@ -90,29 +90,48 @@ body {
   }
   
   .contact-cta {
-    text-align: center;
-    padding: 30px;
-    background: #0096c7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px; 
+    background: linear-gradient(135deg, #82abc2, #6edbff);
     color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    margin: 60px auto; 
+    max-width: 600px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .contact-cta h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: 1.8rem; 
+    margin-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  
+  .contact-cta p {
+    font-size: 1rem; 
+    margin-bottom: 20px;
+    line-height: 1.4;
   }
   
   .contact-button {
-    padding: 10px 20px;
-    background: #fff;
-    color: #0096c7;
+    padding: 10px 25px; 
+    font-size: 1rem; 
+    font-weight: 600;
+    color: #0077b6;
+    background-color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
   
   .contact-button:hover {
-    background: #0077b6;
-    color: #fff;
+    background-color: #023e8a;
+    transform: translateY(-3px);
   }
   
