@@ -25,7 +25,7 @@ function Locations() {
       {
         image: Img19,
         title: 'Kandy',
-        description: 'Sinharaja Forest Reserve is a forest reserve and a biodiversity hotspot in Sri Lanka. It is of international significance and has been designated a Biosphere Reserve and World Heritage Site by UNESCO. ',
+        description: 'Kandy is a large city in central Sri Lanka. It is set on a plateau surrounded by mountains, which are home to tea plantations and biodiverse rainforest. The city is heart is scenic Kandy Lake (Bogambara Lake), which is popular for strolling.',
       },
     {
       image: Img20,

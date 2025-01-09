@@ -9,6 +9,9 @@ import Destinations from './Routes/Destinations';
 import Locations from './Routes/Locations';
 import Services from './Routes/Services';
 import Footer from './Components/Footer';
+import Register from './Auth/Register';
+import Login from './Auth/Login';
+import UserProfile from './Routes/UserProfile';
 
 
 function App() {
@@ -25,6 +28,9 @@ function App() {
         <Route path="/destinations" element={<Destinations />} />
         <Route path="/locations" element={<Locations />} />
         <Route path="/footer" element={<Footer />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/userprofile" element={<UserProfile />} />
 
        </Routes>
     </div>
