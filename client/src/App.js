@@ -1,7 +1,7 @@
 
 import './App.css';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
 import Home from './Routes/Home';
 import About from './Routes/About';
 import Contact from './Routes/Contact';
@@ -12,9 +12,11 @@ import Footer from './Components/Footer';
 import Register from './Auth/Register';
 import Login from './Auth/Login';
 import UserProfile from './Routes/UserProfile';
+import { useAuth } from './Contexts/AuthContext';
 
 
 function App() {
+  const { isAuthenticated } = useAuth();
   return (
     <Router>
     <div className="App">
@@ -28,9 +30,9 @@ function App() {
         <Route path="/destinations" element={<Destinations />} />
         <Route path="/locations" element={<Locations />} />
         <Route path="/footer" element={<Footer />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/register" element={ !isAuthenticated ? <Register /> : <Navigate to="/userprofile" /> } />
+        <Route path="/login" element={ !isAuthenticated ? <Login /> : <Navigate to="/userprofile" />} />
+        <Route path="/userprofile" element={ isAuthenticated ? <UserProfile /> : <Login />} />
 
        </Routes>
     </div>

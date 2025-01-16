@@ -1,19 +1,21 @@
-import React from 'react';
-import { Button, Card, Form, Typography, Input, Alert } from 'antd';
-import { Link } from 'react-router-dom';
-import '../Styles/Register.css';
-import registerImg from '../Assests/test14.jpg';
+import React from "react";
+import { Button, Card, Form, Typography, Input, Alert, Spin } from "antd";
+import { Link } from "react-router-dom";
+import "../Styles/Register.css";
+import registerImg from "../Assests/test17.png";
+import useUserSignup from "../Hooks/userSignup";
 
 const Register = () => {
+  const { loading, error, registerUser } = useUserSignup();
+
   const handleRegister = (values) => {
-    console.log(values);
+    registerUser(values);
   };
 
   return (
     <div className="register-page">
       <Card className="form-container">
         <div className="form-content">
-          {/* Form Section */}
           <div className="form-section">
             <Typography.Title level={3} strong className="title">
               Create an Account
@@ -32,7 +34,7 @@ const Register = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Please input your full name!',
+                    message: "Please input your full name!",
                   },
                 ]}
               >
@@ -45,11 +47,11 @@ const Register = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Please input your email!',
+                    message: "Please input your email!",
                   },
                   {
-                    type: 'email',
-                    message: 'The input is not a valid email!',
+                    type: "email",
+                    message: "The input is not a valid email!",
                   },
                 ]}
               >
@@ -62,7 +64,7 @@ const Register = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Please input your password!',
+                    message: "Please input your password!",
                   },
                 ]}
               >
@@ -75,7 +77,7 @@ const Register = () => {
                 rules={[
                   {
                     required: true,
-                    message: 'Please confirm your password!',
+                    message: "Please confirm your password!",
                   },
                 ]}
               >
@@ -84,24 +86,26 @@ const Register = () => {
                   placeholder="Re-enter Your Password"
                 />
               </Form.Item>
-              {/* {error && (
-                <Alert 
-                description={error} 
-                type='error' 
-                showIcon 
-                closable 
-                className="alert"/>
-              )} */}
+
+              {error && (
+                <Alert
+                  description={error}
+                  type="error"
+                  showIcon
+                  closable
+                  className="alert"
+                />
+              )}
 
               <Form.Item>
                 <Button
-                  //type={`${loading ? '' : 'primary'}`}
+                  type={loading ? "default" : "primary"}
                   htmlType="submit"
                   size="large"
                   className="btn"
+                  disabled={loading}
                 >
-                  {/* {loading ? <Spin /> : 'Create Account' } */}
-                  Create Account
+                  {loading ? <Spin /> : "Create Account"}
                 </Button>
               </Form.Item>
 
@@ -115,7 +119,6 @@ const Register = () => {
             </Form>
           </div>
 
-          {/* Image Section */}
           <div className="image-section">
             <img src={registerImg} alt="Register" className="auth-image" />
           </div>
