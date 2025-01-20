@@ -13,6 +13,8 @@ import Register from './Auth/Register';
 import Login from './Auth/Login';
 import UserProfile from './Routes/UserProfile';
 import { useAuth } from './Contexts/AuthContext';
+import AdminProfile from './Routes/AdminProfile';
+import ItineraryPlanner from './Routes/ItineraryPlanner';
 
 
 function App() {
@@ -33,6 +35,8 @@ function App() {
         <Route path="/register" element={ !isAuthenticated ? <Register /> : <Navigate to="/userprofile" /> } />
         <Route path="/login" element={ !isAuthenticated ? <Login /> : <Navigate to="/userprofile" />} />
         <Route path="/userprofile" element={ isAuthenticated ? <UserProfile /> : <Login />} />
+        <Route path="/adminprofile" element={ isAuthenticated ? <AdminProfile /> : <Login />} />
+        <Route path="/itineraryplanner" element={<ItineraryPlanner />} />
 
        </Routes>
     </div>

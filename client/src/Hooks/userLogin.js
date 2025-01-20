@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { useAuth } from "../Contexts/AuthContext";
 import { message } from "antd";
+import { useNavigate } from "react-router-dom";
 
-const useUserLogin = () => { // Renamed to start with "use" and PascalCase
+const useUserLogin = () => {
   const { login } = useAuth();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const loginUser = async (values) => {
     try {
       setError(null); // Clear previous errors
       setLoading(true); // Start loading spinner
+
       const res = await fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -20,8 +23,15 @@ const useUserLogin = () => { // Renamed to start with "use" and PascalCase
       const data = await res.json();
 
       if (res.status === 200) {
-        message.success("Login successful!"); // Success message
+        message.success("Login successful!");
         login(data.token, data.user); // Save user data and token
+
+        // Redirect based on role
+        if (data.user.role === "admin") {
+          navigate("/adminprofile");
+        } else {
+          navigate("/userprofile");
+        }
       } else if (res.status === 404) {
         setError("User not found. Please check your credentials.");
       } else if (res.status === 400) {

@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Card, Form, Typography, Input, Alert, Spin } from "antd";
 import { Link } from "react-router-dom";
 import "../Styles/Register.css";
-import registerImg from "../Assests/test17.png";
+import registerImg from "../Assests/img27.jpg";
 import useUserSignup from "../Hooks/userSignup";
 
 const Register = () => {
