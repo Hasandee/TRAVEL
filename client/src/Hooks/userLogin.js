@@ -26,6 +26,8 @@ const useUserLogin = () => {
         message.success("Login successful!");
         login(data.token, data.user); // Save user data and token
 
+        console.log(data.user.role);
+        
         // Redirect based on role
         if (data.user.role === "admin") {
           navigate("/adminprofile");

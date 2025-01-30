@@ -18,7 +18,7 @@ import ItineraryPlanner from './Routes/ItineraryPlanner';
 
 
 function App() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated,userData } = useAuth();
   return (
     <Router>
     <div className="App">
@@ -32,8 +32,10 @@ function App() {
         <Route path="/destinations" element={<Destinations />} />
         <Route path="/locations" element={<Locations />} />
         <Route path="/footer" element={<Footer />} />
-        <Route path="/register" element={ !isAuthenticated ? <Register /> : <Navigate to="/userprofile" /> } />
-        <Route path="/login" element={ !isAuthenticated ? <Login /> : <Navigate to="/userprofile" />} />
+        <Route path="/register" element={ !isAuthenticated ? <Register /> : 
+        userData.role === "admin"?<Navigate to="/adminprofile" />: <Navigate to="/userprofile" /> } />
+        <Route path="/login" element={ !isAuthenticated ? <Login /> :
+        userData.role === "admin"?<Navigate to="/adminprofile" />: <Navigate to="/userprofile" /> } />
         <Route path="/userprofile" element={ isAuthenticated ? <UserProfile /> : <Login />} />
         <Route path="/adminprofile" element={ isAuthenticated ? <AdminProfile /> : <Login />} />
         <Route path="/itineraryplanner" element={<ItineraryPlanner />} />

@@ -1,26 +1,33 @@
-export const UserMenuItems = [
-  {
-    title: "Dashboard",
-    url: "/dashboard",
-    cName: "user-nav-links",
-    icon: "fa-solid fa-tachometer-alt"
-  },
-  {
-    title: "Itinerary Planner",
-    url: "/itineraryplanner",
-    cName: "user-nav-links",
-    icon: "fa-solid fa-user"
-  },
-  {
-    title: "Settings",
-    url: "/settings",
-    cName: "user-nav-links",
-    icon: "fa-solid fa-cog"
-  },
-  {
-    title: "Help",
-    url: "/help",
-    cName: "user-nav-links",
-    icon: "fa-solid fa-question-circle"
-  }
-];
+// export const UserMenuItems = [
+//     {
+//       title: 'Home',
+//       url: '/',
+//       cName: 'usernav-links',
+//       icon: 'fa-solid fa-house',
+//     },
+//     {
+//       title: 'Profile',
+//       url: '/profile',
+//       cName: 'usernav-links',
+//       icon: 'fa-solid fa-user',
+//     },
+//     {
+//       title: 'Destinations',
+//       url: '/locations',
+//       cName: 'usernav-links',
+//       icon: 'fa-solid fa-location-dot',
+//     },
+//     {
+//       title: 'Services',
+//       url: '/services',
+//       cName: 'nav-links',
+//       icon: 'fa-solid fa-briefcase',
+//     },
+//     {
+//       title: 'Contact',
+//       url: '/contact',
+//       cName: 'nav-links',
+//       icon: 'fa-solid fa-address-book',
+//     },
+//   ];
+  

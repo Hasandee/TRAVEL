@@ -1,36 +1,35 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { UserMenuItems } from './UserMenuItem.js';
-import '../Styles/UserNavbar.css';
+// import React, { Component } from 'react';
+// import { Link } from 'react-router-dom';
+// import '../Styles/UserNavbar.css';
+// import { UserMenuItems } from '../Components/UserMenuItem.js';
 
-const UserNavbar = () => {
-  const [clicked, setClicked] = useState(false);
+// class UserNavbar extends Component {
+//   state = { clicked: false };
 
-  const handleMenuToggle = () => {
-    setClicked(!clicked);
-  };
+//   handleClick = () => {
+//     this.setState({ clicked: !this.state.clicked });
+//   };
 
-  return (
-    <nav className="UserNavbarItems">
-      <h1 className="user-navbar-logo">UserPortal</h1>
-      <div className="menu-icons" onClick={handleMenuToggle}>
-        <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
-      </div>
-      <ul className={clicked ? "user-nav-menu active" : "user-nav-menu"}>
-        {UserMenuItems.map((item, index) => (
-          <li key={index}>
-            <Link className={item.cName} to={item.url}>
-              <i className={item.icon}></i>
-              {item.title}
-            </Link>
-          </li>
-        ))}
-        <Link to="/logout">
-          <button className="logout-btn">Logout</button>
-        </Link>
-      </ul>
-    </nav>
-  );
-};
+//   render() {
+//     return (
+//       <nav className="user-navbar">
+//         <h1 className="user-navbar-logo">ExploreLanka</h1>
+//         <div className="user-menu-icons" onClick={this.handleClick}>
+//           <i className={this.state.clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
+//         </div>
+//         <ul className={this.state.clicked ? 'user-nav-menu active' : 'user-nav-menu'}>
+//           {UserMenuItems.map((item, index) => (
+//             <li key={index}>
+//               <Link className={item.cName} to={item.url}>
+//                 <i className={item.icon}></i>
+//                 {item.title}
+//               </Link>
+//             </li>
+//           ))}
+//         </ul>
+//       </nav>
+//     );
+//   }
+// }
 
-export default UserNavbar;
+// export default UserNavbar;
