@@ -20,9 +20,9 @@ le_country_category = data["le_country_category"]
 le_preferred_locations = data["le_preferred_locations"]
 le_activities = data["le_activities"]
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+# @app.route('/')
+# def hello_world():
+#     return 'Hello, World!'
 
 @app.route('/predict', methods=['POST'])
 def predict():
