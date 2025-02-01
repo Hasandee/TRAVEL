@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/dbCon.js";
 import authRoutes from "./Routes/authRoutes.js";
+import mlRoutes from "./Routes/mlRoutes.js";
 
 const app = express();
 dotenv.config();
@@ -17,6 +18,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/ml",mlRoutes)
 
 // Global Error Handling Middleware
 app.use((err, req, res, next) => {
@@ -28,6 +30,8 @@ app.use((err, req, res, next) => {
     message: err.message || "Internal Server Error",
   });
 });
+
+
 
 // Start Server
 const PORT = process.env.PORT || 8080;

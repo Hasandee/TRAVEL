@@ -15,6 +15,7 @@ import UserProfile from './Routes/UserProfile';
 import { useAuth } from './Contexts/AuthContext';
 import AdminProfile from './Routes/AdminProfile';
 import ItineraryPlanner from './Routes/ItineraryPlanner';
+import TravelForm from './Routes/TravelForm';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/userprofile" element={ isAuthenticated ? <UserProfile /> : <Login />} />
         <Route path="/adminprofile" element={ isAuthenticated ? <AdminProfile /> : <Login />} />
         <Route path="/itineraryplanner" element={<ItineraryPlanner />} />
+        <Route path="/travelform" element={<TravelForm />} />
 
        </Routes>
     </div>
