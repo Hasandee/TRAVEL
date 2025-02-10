@@ -1,7 +1,23 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../Styles/TravelForm.css"; // Import the CSS file
+import Footer from '../Components/Footer';
+import { useAuth } from '../Contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import DefaultProfilePic from '../Assests/img2.jpg';
+import FormImage1 from '../Assests/img29.avif'; 
+import FormImage2 from '../Assests/img30.jpg';
+import FormImage3 from '../Assests/img31.jpg'; 
+import FormImage4 from '../Assests/img32.jpg';
+import FormImage5 from '../Assests/img33.avif';
+import FormImage6 from '../Assests/img34.jpg';
+import FormImage7 from '../Assests/img35.jpg';
+import FormImage8 from '../Assests/img36.jpg';
 
 const TravelForm = () => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -9,248 +25,288 @@ const TravelForm = () => {
     budget_range: "",
     travel_type: "",
     duration: "",
-    transport_preferences: [],
+    accommodation_preference: "",
+    transport_preferences: "",
     country_category: "",
   });
 
+  const [step, setStep] = useState(0); // Track current question index
   const [recommendation, setRecommendation] = useState(null);
-  const [error, setError] = useState(null);
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  // Array of images corresponding to each step
+  const stepImages = [FormImage1, FormImage2, FormImage3, FormImage4, FormImage5, FormImage6, FormImage7, FormImage8];
+
+  const toggleDropdown = () => setShowDropdown(!showDropdown);
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
     if (type === "checkbox") {
+      // Ensure maximum of 2 interests can be selected
+      if (name === "interests" && formData.interests.length >= 2 && checked) {
+        window.alert("You can select a maximum of 2 interests.");
+        return;
+      }
+
       setFormData((prev) => ({
         ...prev,
         [name]: checked
-          ? [...prev[name], value] // Add selected value
-          : prev[name].filter((item) => item !== value), // Remove unselected value
+          ? [...prev[name], value]
+          : prev[name].filter((item) => item !== value),
       }));
     } else {
       setFormData({ ...formData, [name]: value });
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-    setRecommendation(null);
+  const handleNext = () => {
+    // Validate current step before proceeding
+    const currentQuestion = questions[step];
 
-    try {
-      // Prepare data before sending
-      const formDataToSend = {
-        ...formData,
-        interests: Array.isArray(formData.interests) ? formData.interests.join(', ') : formData.interests,  // Ensure it's a string
-        transport_preferences: Array.isArray(formData.transport_preferences) ? formData.transport_preferences.join(', ') : formData.transport_pref
-      };
-
-     console.log(formDataToSend);
-     
-
-      const response = await axios.post(
-        "http://127.0.0.1:8080/api/ml/predict",  // Correct endpoint
-        formDataToSend,  {
-            headers: {
-              'Content-Type': 'application/json', 
-            }
-          }
+    if (currentQuestion.fields) {
+      // Check if all fields in the current step are filled
+      const isStepValid = currentQuestion.fields.every(
+        (field) => formData[field.name].trim() !== ""
       );
-      
-      
 
-      
-      setRecommendation(response.data.data);
-     
-    } catch (err) {
-        
-        
-      setError(
-        err.response?.data?.error || "An error occurred. Please try again."
-      );
+      if (!isStepValid) {
+        window.alert("Please fill out all fields before proceeding.");
+        return;
+      }
+    } else if (currentQuestion.type === "checkbox" || currentQuestion.type === "radio") {
+      // Check if at least one option is selected for checkbox/radio questions
+      if (formData[currentQuestion.name].length === 0) {
+        window.alert("Please select at least one option before proceeding.");
+        return;
+      }
+    }
+
+    // Proceed to the next step if validation passes
+    if (step < questions.length - 1) {
+      setStep(step + 1);
     }
   };
 
+  const handleBack = () => {
+    if (step > 0) {
+      setStep(step - 1);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validate the entire form before submission
+    const isFormValid = questions.every((question) => {
+      if (question.fields) {
+        return question.fields.every((field) => formData[field.name].trim() !== "");
+      } else if (question.type === "checkbox" || question.type === "radio") {
+        return formData[question.name].length > 0;
+      }
+      return true;
+    });
+
+    if (!isFormValid) {
+      window.alert("Please fill out all fields before submitting.");
+      return;
+    }
+
+    try {
+      const formDataToSend = {
+        ...formData,
+        interests: Array.isArray(formData.interests) ? formData.interests.join(', ') : formData.interests,
+      };
+
+      const response = await axios.post(
+        "http://127.0.0.1:8080/api/ml/predict",
+        formDataToSend,
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+
+      if (response.data && response.data.data) {
+        setRecommendation(response.data.data);
+        navigate("/results", { state: { recommendation: response.data.data } });
+      } else {
+        window.alert("Unexpected API response format.");
+      }
+    } catch (err) {
+      console.error("API Error:", err);
+      window.alert(err.response?.data?.error || "An error occurred. Please try again.");
+    }
+  };
+
+  const questions = [
+    {
+      label: "Personal Information",
+      fields: [
+        { label: "Name", name: "name", type: "text" },
+        { label: "Email", name: "email", type: "email" },
+      ],
+    },
+    {
+      label: "Interests",
+      name: "interests",
+      type: "checkbox",
+      options: ["Culture", "Adventure", "Beach", "Wildlife"],
+    },
+    {
+      label: "Budget Range",
+      name: "budget_range",
+      type: "radio",
+      options: ["Low", "Medium", "High"],
+    },
+    {
+      label: "Travel Type",
+      name: "travel_type",
+      type: "radio",
+      options: ["Solo", "Family", "Group"],
+    },
+    {
+      label: "Duration",
+      name: "duration",
+      type: "radio",
+      options: ["One Week", "Two Weeks", "Three Weeks", "More than Three Weeks"],
+    },
+    {
+      label: "Accommodation Preference",
+      name: "accommodation_preference",
+      type: "radio",
+      options: ["Budget", "Luxury", "Eco-friendly"],
+    },
+    {
+      label: "Transport Preferences",
+      name: "transport_preferences",
+      type: "radio",
+      options: ["Train", "Bus", "Rental Car"],
+    },
+    {
+      label: "Country Category",
+      name: "country_category",
+      type: "radio",
+      options: ["Sri Lanka", "Foreign Country"],
+    },
+  ];
+
   return (
-    <div style={{ padding: "20px", maxWidth: "600px", margin: "50px auto" }}>
-      <h2>Tourist Information Form</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Personal Information */}
-        <div style={{ marginBottom: "10px" }}>
-          <label>Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            style={{ width: "100%", padding: "8px", marginTop: "5px" }}
-          />
-        </div>
+    <div className="travelform">
+      <nav className="navbar">
+        <ul>
+          <h1 className="navbar-logo">ExploreLanka</h1>
+          <li><a href="/">Home</a></li>
+          <li><a href="/travelform">Itinerary Planner</a></li>
+          <li><a href="/destinations">Destinations</a></li>
+          <li><a href="/queries">Queries</a></li>
+          <li><a href="/feedback">Feedback</a></li>
+          <li className="profile-icon" onClick={toggleDropdown}>
+            <img src={profilePicture || DefaultProfilePic} alt="Profile" className="profile-pic" />
+            {showDropdown && (
+              <div className="dropdown-menu">
+                <a href="/profile">Profile</a>
+                <a href="/trips">Trips</a>
+                <a href="/write-review">Write a Review</a>
+                <a href="/messages">Messages</a>
+                <button onClick={handleLogout} className="logout-button">Sign Out</button>
+              </div>
+            )}
+          </li>
+        </ul>
+      </nav>
 
-        <div style={{ marginBottom: "10px" }}>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            style={{ width: "100%", padding: "8px", marginTop: "5px" }}
-          />
+      <div className="form-container">
+        <div className="form-image">
+          <img src={stepImages[step]} alt={`Step ${step + 1}`} />
         </div>
-
-        {/* Travel Preferences */}
-        <div style={{ marginBottom: "10px" }}>
-          <label>Interests:</label>
-          <div>
-            {["Culture", "Adventure", "Beach", "Wildlife", "Relaxation", "Culinary"].map((interests) => (
-              <label key={interests} style={{ marginRight: "10px" }}>
-                <input
-                  type="checkbox"
-                  name="interests"
-                  value={interests}
-                  onChange={handleChange}
-                />{" "}
-                {interests}
-              </label>
+        <form onSubmit={handleSubmit} className="form">
+          <div className="question-container" style={{ transform: `translateX(-${step * 100}%)` }}>
+            {questions.map((q, index) => (
+              <div className="question" key={index}>
+                <label className="label">{q.label}:</label>
+                {q.fields ? (
+                  q.fields.map((field) => (
+                    <div key={field.name}>
+                      <label className="label">{field.label}:</label>
+                      <input
+                        type={field.type}
+                        name={field.name}
+                        value={formData[field.name]}
+                        onChange={handleChange}
+                        required
+                        className="input"
+                      />
+                    </div>
+                  ))
+                ) : q.type === "checkbox" || q.type === "radio" ? (
+                  <div className="options">
+                    {q.options.map((option) => (
+                      <label key={option} className="option-label">
+                        <input
+                          type={q.type}
+                          name={q.name}
+                          value={option}
+                          onChange={handleChange}
+                          className="option-input"
+                          checked={
+                            q.type === "checkbox"
+                              ? formData[q.name].includes(option)
+                              : formData[q.name] === option
+                          }
+                        />
+                        {option}
+                      </label>
+                    ))}
+                  </div>
+                ) : null}
+                <div className="button-container">
+                  {step > 0 && (
+                    <button type="button" className="nextback-button" onClick={handleBack}>
+                      Back
+                    </button>
+                  )}
+                  {index < questions.length - 1 ? (
+                    <button type="button" className="next-button" onClick={handleNext}>
+                      Next
+                    </button>
+                  ) : (
+                    <button type="submit" className="submit-button">
+                      Submit
+                    </button>
+                  )}
+                </div>
+              </div>
             ))}
           </div>
-        </div>
-
-        <div style={{ marginBottom: "10px" }}>
-          <label>Budget Range:</label>
-          <div>
-            {["Low", "Medium", "High"].map((budget_range) => (
-              <label key={budget_range} style={{ marginRight: "10px" }}>
-                <input
-                  type="radio"
-                  name="budget_range"
-                  value={budget_range}
-                  onChange={handleChange}
-                />{" "}
-                {budget_range}
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div style={{ marginBottom: "10px" }}>
-          <label>Travel Type:</label>
-          <div>
-            {["Solo", "Family", "Group"].map((travel_type) => (
-              <label key={travel_type} style={{ marginRight: "10px" }}>
-                <input
-                  type="radio"
-                  name="travel_type"
-                  value={travel_type}
-                  onChange={handleChange}
-                />{" "}
-                {travel_type}
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div style={{ marginBottom: "10px" }}>
-          <label>Duration:</label>
-          <div>
-            {["One Week", "Two Weeks", "Three Weeks", "More than Three Weeks"].map((duration) => (
-              <label key={duration} style={{ marginRight: "10px" }}>
-                <input
-                  type="radio"
-                  name="duration"
-                  value={duration}
-                  onChange={handleChange}
-                />{" "}
-                {duration}
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div style={{ marginBottom: "10px" }}>
-          <label>Accommodation Preference:</label>
-          <div>
-            {["Budget", "Luxury", "Eco-friendly"].map((accommodation_preference) => (
-              <label key={accommodation_preference} style={{ marginRight: "10px" }}>
-                <input
-                  type="radio"
-                  name="accommodation_preference"
-                  value={accommodation_preference}
-                  onChange={handleChange}
-                />{" "}
-                {accommodation_preference}
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div style={{ marginBottom: "10px" }}>
-          <label>Transport Preferences:</label>
-          <div>
-            {["Train", "Bus", "Rental Car"].map((transport_preferences) => (
-              <label key={transport_preferences} style={{ marginRight: "10px" }}>
-                <input
-                  type="checkbox"
-                  name="transport_preferences"
-                  value={transport_preferences}
-                  onChange={handleChange}
-                />{" "}
-                {transport_preferences}
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <div style={{ marginBottom: "10px" }}>
-          <label>Country Category:</label>
-          <div>
-            {["Sri Lanka", "Foreign Country"].map((country_category) => (
-              <label key={country_category} style={{ marginRight: "10px" }}>
-                <input
-                  type="radio"
-                  name="country_category"
-                  value={country_category}
-                  onChange={handleChange}
-                />{" "}
-                {country_category}
-              </label>
-            ))}
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          style={{
-            backgroundColor: "#28a745",
-            color: "white",
-            padding: "10px",
-            border: "none",
-            width: "100%",
-            cursor: "pointer",
-          }}
-        >
-          Get Itinerary
-        </button>
-      </form>
-
-      {error && (
-        <div style={{ color: "red", marginTop: "20px", fontWeight: "bold" }}>
-          Error: {error}
-        </div>
-      )}
+        </form>
+        
+      </div>
 
       {recommendation && (
-        <div style={{ marginTop: "20px" }}>
+        <div className="recommendation">
           <h3>Recommended Itinerary:</h3>
-          <p>
-            <strong>Destination:</strong> {recommendation.Preferred_Locations}
-          </p>
-          <p>
-            <strong>Activities:</strong> {recommendation.Activities}
-          </p>
+          {recommendation.Preferred_Locations ? (
+            <p><strong>Destination:</strong> {recommendation.Preferred_Locations}</p>
+          ) : (
+            <p className="error-text">Destination data missing</p>
+          )}
+
+          {recommendation.Activities ? (
+            <p><strong>Activities:</strong> {recommendation.Activities}</p>
+          ) : (
+            <p className="error-text">Activity data missing</p>
+          )}
         </div>
       )}
+      <div className="formfooter">
+       <Footer />
+       </div>
     </div>
   );
 };

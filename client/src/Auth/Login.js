@@ -14,13 +14,13 @@ const Login = () => {
 
   return (
     <div className="register-page">
-      <Card className="form-container">
-        <div className="form-content">
-          <div className="image-section">
+      <Card className="registerform-container">
+        <div className="registerform-content">
+          <div className="registerimage-section">
             <img src={loginImg} alt="Login" className="auth-image" />
           </div>
-          <div className="form-section">
-            <Typography.Title level={3} strong className="title">
+          <div className="registerform-section">
+            <Typography.Title level={3} strong className="registertitle">
               Sign In
             </Typography.Title>
             <Typography.Text type="secondary" className="slogan">

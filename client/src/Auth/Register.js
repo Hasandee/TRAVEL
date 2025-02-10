@@ -14,10 +14,10 @@ const Register = () => {
 
   return (
     <div className="register-page">
-      <Card className="form-container">
-        <div className="form-content">
-          <div className="form-section">
-            <Typography.Title level={3} strong className="title">
+      <Card className="registerform-container">
+        <div className="registerform-content">
+          <div className="registerform-section">
+            <Typography.Title level={3} strong className="registertitle">
               Create an Account
             </Typography.Title>
             <Typography.Text type="secondary" className="slogan">
@@ -119,7 +119,7 @@ const Register = () => {
             </Form>
           </div>
 
-          <div className="image-section">
+          <div className="registerimage-section">
             <img src={registerImg} alt="Register" className="auth-image" />
           </div>
         </div>

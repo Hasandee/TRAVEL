@@ -1,0 +1,290 @@
+/* Background styling */
+.travelform {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  padding: 50px;
+  min-height: 180vh;
+  overflow: hidden;
+  flex-direction: column;
+ 
+}
+
+/* Enlarged Box containing form and image */
+.form-container {
+  display: flex;
+  background: white;
+  padding: 40px; /* Increased padding for more space */
+  border-radius: 15px;
+  max-width: 1400px; /* Increased width */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+  align-items: center;
+  justify-content: space-between; /* Space between image and form */
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+/* Left-side image */
+.form-image {
+  flex: 1;
+  margin-right: 40px; /* Space between image and form */
+}
+
+.form-image img {
+  width: 60%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.5s ease-in-out; /* Smooth transition for image change */
+}
+
+/* Form content */
+.form {
+  flex: 1;
+  text-align: left; /* Align text to the left */
+  padding-left: 30px; /* Space between image & text */
+  overflow: hidden;
+}
+
+/* Question container */
+.question-container {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Individual question */
+.question {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+/* Increase font size for "Personal Information" label */
+.question-container .question:first-child > .label {
+  font-size: 30px; /* Increased font size for the main label */
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 15px;
+  display: block;
+}
+
+/* Decrease font size for nested labels (Name, Email) */
+.question-container .question:first-child .label:not(.question-container .question:first-child > .label) {
+  font-size: 18px; /* Decreased font size for nested labels */
+  font-weight: normal; /* Optional: Make it less bold */
+}
+
+/* Decrease font size for other labels (non-Personal Information) */
+.question-container .question:not(:first-child) .label {
+  font-size: 20px; /* Decreased font size */
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.input {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-label {
+  font-size: 16px;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.option-input {
+  width: 20px;
+  height: 20px;
+}
+
+/* Style the buttons */
+.next-button, .submit-button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: none;
+  background-color: #3e658e;
+  color: white;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.next-button:hover, .submit-button:hover {
+  background-color: #023e8a;
+  transform: scale(1.05);
+}
+.nextback-button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: none;
+  background-color: #6c757d;
+  color: white;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nextback-button:hover {
+  background-color: #5a6268;
+  transform: scale(1.05);
+}
+
+/* Error and Recommendation styling */
+.error, .recommendation {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #ff0000;
+}
+
+.recommendation {
+  color: #444;
+}
+
+.error-text {
+  color: #ff0000;
+}
+
+/* Navbar styling */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  list-style: none;
+}
+
+.navbar-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #3e658e;
+}
+
+.navbar li {
+  margin: 0 10px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #444;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.navbar a:hover {
+  color: #023e8a;
+}
+
+.profile-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dropdown-menu a {
+  text-decoration: none;
+  color: #444;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.dropdown-menu a:hover {
+  color: #023e8a;
+}
+
+.logout-button {
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #cc0000;
+}
+/* Button container */
+.button-container {
+  display: flex;
+  gap: 40px; /* Space between buttons */
+  margin-top: 40px;
+}
+
+/* Back button */
+.back-button {
+  padding: 12px 24px;
+  border: none;
+  background-color: #6c757d; /* Gray color for back button */
+  color: white;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.back-button:hover {
+  background-color: #5a6268; /* Darker gray on hover */
+  transform: scale(1.05);
+}
+
+
+
+
+.formfooter {
+  background-color: #333; /* Dark background */
+  color: white;
+  padding: 20px;
+  text-align: center;
+  width:120%;
+  
+}

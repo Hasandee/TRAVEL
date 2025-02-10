@@ -17,7 +17,7 @@ function Home() {
      title="Explore the Beauty of Sri Lanka"
      text="Discover breathtaking landscapes, vibrant culture, and unforgettable adventures."
      buttonText="Travel Plan"
-     url="/"
+     url="/login"
      btnClass="show"
      />
       <Destination/>

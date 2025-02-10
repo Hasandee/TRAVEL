@@ -7,7 +7,7 @@
     /* background-color: rgb(170, 209, 223); */
   }
   
-  .form-container {
+  .registerform-container {
     width: 100%;
     max-width: 900px;
     border-radius: 8px;
@@ -17,17 +17,17 @@
     
   }
   
-  .form-content {
+  .registerform-content {
     display: flex;
     flex-direction: row;
   }
   
-  .form-section {
+  .registerform-section {
     flex: 1;
     padding: 24px;
   }
   
-  .image-section {
+  .registerimage-section {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -42,7 +42,7 @@
     border-radius: 8px;
   }
   
-  .title {
+  .registertitle {
     margin-bottom: 8px;
     text-align: center;
   }

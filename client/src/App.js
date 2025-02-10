@@ -14,8 +14,9 @@ import Login from './Auth/Login';
 import UserProfile from './Routes/UserProfile';
 import { useAuth } from './Contexts/AuthContext';
 import AdminProfile from './Routes/AdminProfile';
-import ItineraryPlanner from './Routes/ItineraryPlanner';
 import TravelForm from './Routes/TravelForm';
+import ItineraryPage from './Components/ItineraryPage';
+import Results from './Routes/Results';
 
 
 function App() {
@@ -39,8 +40,9 @@ function App() {
         userData.role === "admin"?<Navigate to="/adminprofile" />: <Navigate to="/userprofile" /> } />
         <Route path="/userprofile" element={ isAuthenticated ? <UserProfile /> : <Login />} />
         <Route path="/adminprofile" element={ isAuthenticated ? <AdminProfile /> : <Login />} />
-        <Route path="/itineraryplanner" element={<ItineraryPlanner />} />
         <Route path="/travelform" element={<TravelForm />} />
+        <Route path="/itinerarypage" element={<ItineraryPage />} />
+        <Route path="/results" element={<Results />} />
 
        </Routes>
     </div>
