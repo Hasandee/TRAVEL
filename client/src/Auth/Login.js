@@ -6,10 +6,14 @@ import loginImg from "../Assests/img26.jpg";
 import useUserLogin from "../Hooks/userLogin";
 
 const Login = () => {
-  const { error, loading, loginUser } = useUserLogin();
+  const { error, loading, loginUser, forgotPassword } = useUserLogin();
 
   const handleLogin = async (values) => {
-    await loginUser(values); // Unified login for users and admins
+    await loginUser(values);
+  };
+
+  const handleForgotPassword = async (values) => {
+    await forgotPassword(values.email);
   };
 
   return (
@@ -73,6 +77,14 @@ const Login = () => {
                   <Button size="large" className="btn">
                     Create an Account
                   </Button>
+                </Link>
+              </Form.Item>
+
+              <Form.Item>
+                <Link to="/forgot-password">
+                  <Typography.Text type="secondary" className="forgot-password">
+                    Forgot Password?
+                  </Typography.Text>
                 </Link>
               </Form.Item>
             </Form>

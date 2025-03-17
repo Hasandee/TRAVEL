@@ -17,6 +17,9 @@ import AdminProfile from './Routes/AdminProfile';
 import TravelForm from './Routes/TravelForm';
 import ItineraryPage from './Components/ItineraryPage';
 import Results from './Routes/Results';
+import ForgotPassword from './Components/ForgotPassword';
+import ResetPassword from './Components/ResetPassword';
+import Profile from './Routes/profile';
 
 
 function App() {
@@ -43,6 +46,10 @@ function App() {
         <Route path="/travelform" element={<TravelForm />} />
         <Route path="/itinerarypage" element={<ItineraryPage />} />
         <Route path="/results" element={<Results />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/profile" element={<Profile />} />
+        
 
        </Routes>
     </div>

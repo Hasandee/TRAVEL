@@ -11,8 +11,8 @@ const useUserLogin = () => {
 
   const loginUser = async (values) => {
     try {
-      setError(null); // Clear previous errors
-      setLoading(true); // Start loading spinner
+      setError(null);
+      setLoading(true);
 
       const res = await fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
@@ -24,11 +24,8 @@ const useUserLogin = () => {
 
       if (res.status === 200) {
         message.success("Login successful!");
-        login(data.token, data.user); // Save user data and token
+        login(data.token, data.user);
 
-        console.log(data.user.role);
-        
-        // Redirect based on role
         if (data.user.role === "admin") {
           navigate("/adminprofile");
         } else {
@@ -36,7 +33,7 @@ const useUserLogin = () => {
         }
       } else if (res.status === 404) {
         setError("User not found. Please check your credentials.");
-      } else if (res.status === 400) {
+      } else if (res.status === 400 || res.status === 401) {
         setError("Invalid email or password.");
       } else {
         message.error("Login failed. Please try again.");
@@ -44,11 +41,41 @@ const useUserLogin = () => {
     } catch (err) {
       setError("Something went wrong. Please try again.");
     } finally {
-      setLoading(false); // Stop loading spinner
+      setLoading(false);
     }
   };
 
-  return { loading, error, loginUser }; // Return state and loginUser function
+  // Forgot Password Function
+  const forgotPassword = async (email) => {
+    try {
+      setError(null);
+      setLoading(true);
+
+      const res = await fetch("http://localhost:8080/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (res.status === 200) {
+        message.success("Password reset link sent to your email.");
+      } else if (res.status === 404) {
+        setError("Email not found. Please enter a valid email.");
+      } else {
+        setError("Failed to send reset link. Try again.");
+      }
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  
+
+  return { loading, error, loginUser, forgotPassword };
 };
 
 export default useUserLogin;
