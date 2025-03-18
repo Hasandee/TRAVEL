@@ -39,7 +39,7 @@ const UserProfile = () => {
           <li><a href="/userprofile">Home</a></li>
           <li><a href="/itinerarypage">Itinerary Planner</a></li>
           <li><a href="/destinations">Destinations</a></li>
-          <li><a href="/queries">Queries</a></li>
+          <li><a href="/query">Queries</a></li>
           <li><a href="/feedback">Feedback</a></li>
           <li className="profile-icon" onClick={toggleDropdown}>
           <img src={profilePicture || DefaultProfilePic} alt="Profile" className="profile-pic" />

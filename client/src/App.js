@@ -20,6 +20,12 @@ import Results from './Routes/Results';
 import ForgotPassword from './Components/ForgotPassword';
 import ResetPassword from './Components/ResetPassword';
 import Profile from './Routes/profile';
+import SavedItinerary from './Routes/SavedItinerary';
+import AdminItineraries from './Routes/AdminItineraries';
+import Query from './Routes/Query';
+import AdminQuery from './Routes/AdminQuery';
+import Feedback from './Routes/Feedback';
+import AdminFeedback from './Routes/AdminFeedback';
 
 
 function App() {
@@ -49,6 +55,12 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/saveditinerary" element={<SavedItinerary />} />
+        <Route path="/adminitineraries" element={<AdminItineraries />} />
+        <Route path="/query" element={<Query />} />
+        <Route path="/adminquery" element={<AdminQuery />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/adminfeedback" element={<AdminFeedback />} />
         
 
        </Routes>

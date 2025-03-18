@@ -1,0 +1,75 @@
+/* SavedItineraries.css */
+
+/* Container Styling */
+#saved-itineraries-container {
+    padding: 20px;
+    text-align: center;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  /* Title Styling */
+  #saved-itineraries-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Button Styling */
+  #back-to-profile-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  
+  #back-to-profile-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Itinerary List */
+  #itinerary-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Itinerary Card */
+  .itinerary-card {
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    width: 80%;
+    max-width: 600px;
+    text-align: left;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .itinerary-card:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Itinerary Labels */
+  .itinerary-label {
+    font-weight: 600;
+    color: #222;
+  }
+  
+  /* Loading & No Data Message */
+  #loading-message,
+  #no-itineraries-message {
+    font-size: 18px;
+    color: #777;
+    margin-top: 10px;
+  }
+  

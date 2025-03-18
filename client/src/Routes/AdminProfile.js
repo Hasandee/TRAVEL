@@ -1,21 +1,38 @@
-import React from 'react'
-import { useAuth } from '../Contexts/AuthContext'
+import React from 'react';
+import { useAuth } from '../Contexts/AuthContext';
 import { Button } from 'antd';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AdminProfile = () => {
   const { UserData, logout } = useAuth();
-const navigate = useNavigate();
+  const navigate = useNavigate();
+
   const handleLogout = async () => {
     await logout();
     navigate("/login");
-};
+  };
+
+  const handleSeeItineraries = () => {
+    navigate('/adminitineraries');
+  };
+
+  const handleSeeQueries = () => {
+    navigate('/adminquery');
+  };
+
+  const handleSeeFeedbacks = () => {
+    navigate('/adminfeedback');
+  };
+
   return (
     <div>
-      <Button onClick={logout}> Logout</Button>
       <h1>Admin Profile</h1>
+      <Button onClick={handleSeeItineraries} style={{ margin: '10px' }}>See the Itineraries</Button>
+      <Button onClick={handleSeeQueries} style={{ margin: '10px' }}>See the Queries</Button>
+      <Button onClick={handleSeeFeedbacks} style={{ margin: '10px' }}>See the Feedbacks</Button>
+      <Button onClick={handleLogout} style={{ margin: '10px' }}>Logout</Button>
     </div>
-  )
-}
+  );
+};
 
-export default AdminProfile
+export default AdminProfile;
