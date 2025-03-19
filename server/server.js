@@ -107,6 +107,21 @@ app.get("/api/feedback", async (req, res) => {
   }
 });
 
+// DELETE feedback (Admin Only)
+app.delete("/api/feedback/:id", async (req, res) => {
+  try {
+    const feedbackId = req.params.id;
+    const deletedFeedback = await Feedback.findByIdAndDelete(feedbackId);
+    if (!deletedFeedback) {
+      return res.status(404).json({ error: "Feedback not found" });
+    }
+    res.status(200).json({ message: "Feedback deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting feedback:", error);
+    res.status(500).json({ error: "Failed to delete feedback" });
+  }
+});
+
 // Global Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error("Global Error:", err);

@@ -211,7 +211,7 @@ const TravelForm = () => {
             {showDropdown && (
               <div className="dropdown-menu">
                 <a href="/profile">Profile</a>
-                <a href="/trips">Trips</a>
+                <a href="/saveditinerary">Trips</a>
                 <a href="/write-review">Write a Review</a>
                 <a href="/messages">Messages</a>
                 <button onClick={handleLogout} className="logout-button">Sign Out</button>

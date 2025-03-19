@@ -64,4 +64,18 @@
     color: #777;
     margin-top: 20px;
   }
-  
+  .admin-delete-button  {
+    background-color: #dc3545; /* Red */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.admin-delete-button:hover {
+    background-color: #c82333; /* Darker red */
+    transform: scale(1.05);
+}

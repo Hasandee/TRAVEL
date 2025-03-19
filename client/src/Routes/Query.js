@@ -45,6 +45,9 @@ function Query() {
     await submitQuery({ text: query, email: loggedUserEmail });
     setQuery("");
     loadQueries();
+    
+    // Show success alert after submission
+    alert("Query Submitted Successfully");
   };
 
   const handleLogout = async () => {
@@ -72,7 +75,7 @@ function Query() {
             {showDropdown && ( // Conditionally render dropdown menu
               <div className="dropdown-menu">
                 <a href="/profile">Profile</a>
-                <a href="/trips">Trips</a>
+                <a href="/saveditinerary">Trips</a>
                 <a href="/write-review">Write a Review</a>
                 <a href="/messages">Messages</a>
                 <button onClick={handleLogout} className="logout-button">Sign Out</button>

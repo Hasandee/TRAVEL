@@ -71,4 +71,15 @@
   .admin-back-button:hover {
     background-color: #023e8a;
   }
-  
+  /* Add this to your AdminQuery.css */
+.not-replied {
+  background-color: #ffe0e0;  /* Light red background for not replied queries */
+}
+
+.not-replied td {
+  color: #d9534f;  /* Red text color */
+}
+/* Add this to your AdminQuery.css */
+.not-replied .admin-button {
+  margin-right: 20px; /* Space between the buttons */
+}
