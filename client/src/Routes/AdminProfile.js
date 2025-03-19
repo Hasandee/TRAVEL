@@ -2,6 +2,7 @@ import React from 'react';
 import { useAuth } from '../Contexts/AuthContext';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import '../Styles/AdminProfile.css'; // Import the custom CSS file
 
 const AdminProfile = () => {
   const { UserData, logout } = useAuth();
@@ -29,13 +30,15 @@ const AdminProfile = () => {
   };
 
   return (
-    <div>
-      <h1>Admin Profile</h1>
-      <Button onClick={handleSeeItineraries} style={{ margin: '10px' }}>See the Itineraries</Button>
-      <Button onClick={handleSeeQueries} style={{ margin: '10px' }}>See the Queries</Button>
-      <Button onClick={handleSeeFeedbacks} style={{ margin: '10px' }}>See the Feedbacks</Button>
-      <Button onClick={handleSeeUsers} style={{ margin: '10px' }}>See the Users</Button>
-      <Button onClick={handleLogout} style={{ margin: '10px' }}>Logout</Button>
+    <div className="admin-profile-container">
+      <h1 className="admin-profile-title">Welcome, Admin</h1>
+      <div className="button-container">
+        <Button onClick={handleSeeItineraries} className="admin-profile-button">Itineraries</Button>
+        <Button onClick={handleSeeQueries} className="admin-profile-button">Queries</Button>
+        <Button onClick={handleSeeFeedbacks} className="admin-profile-button">Feedbacks</Button>
+        <Button onClick={handleSeeUsers} className="admin-profile-button">Users</Button>
+        <Button onClick={handleLogout} className="logout-button">Logout</Button>
+      </div>
     </div>
   );
 };

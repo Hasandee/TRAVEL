@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import "../Styles/AdminFeedback.css";
+import { useNavigate } from "react-router-dom"; 
 
-function AdminFeedback() {
+function AdminFeedback({ onBack }) {
   const [feedbacks, setFeedbacks] = useState([]);
+  const navigate = useNavigate();
 
-  // Fetch all feedbacks
   useEffect(() => {
     fetch("http://localhost:8080/api/feedback")
       .then((res) => res.json())
@@ -12,18 +14,32 @@ function AdminFeedback() {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Admin Feedback Panel</h2>
+    <div className="admin-feedback-container">
+      <button className="admin-back-button"  onClick={() => navigate("/adminprofile")}>
+        ⬅ Back
+      </button>
+      <h2 className="admin-feedback-title">Admin Feedback Panel</h2>
       {feedbacks.length === 0 ? (
-        <p>No feedback available.</p>
+        <p className="admin-no-feedback">No feedback available.</p>
       ) : (
-        feedbacks.map((feedback) => (
-          <div key={feedback._id} style={{ border: "1px solid #ddd", padding: "10px", marginTop: "10px" }}>
-            <p><strong>Email:</strong> {feedback.email}</p>
-            <p><strong>Feedback:</strong> {feedback.message}</p>
-            <p><small>{new Date(feedback.createdAt).toLocaleString()}</small></p>
-          </div>
-        ))
+        <table className="admin-feedback-table">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Feedback</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {feedbacks.map((feedback) => (
+              <tr key={feedback._id}>
+                <td>{feedback.email}</td>
+                <td>{feedback.message}</td>
+                <td>{new Date(feedback.createdAt).toLocaleString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );

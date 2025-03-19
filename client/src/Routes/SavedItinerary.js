@@ -35,7 +35,7 @@ function SavedItineraries() {
   return (
     <div id="saved-itineraries-container">
       <h2 id="saved-itineraries-title">Saved Itineraries</h2>
-      <button id="back-to-profile-btn" onClick={() => navigate("/profile")}>
+      <button id="back-to-profile-btn" onClick={() => navigate("/userprofile")}>
         Back to Profile
       </button>
       {loading ? (

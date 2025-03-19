@@ -1,24 +1,25 @@
-// Query.js (Frontend)
 import React, { useState, useEffect } from "react";
 import { submitQuery, fetchLoggedUserQueries } from "../api.js";
+import "../Styles/Query.css"; // Import the CSS file
+import Footer from '../Components/Footer';
+import DefaultProfilePic from '../Assests/img2.jpg';
+import { useAuth } from '../Contexts/AuthContext'; // Importing the useAuth context
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function Query() {
   const [query, setQuery] = useState("");
   const [queries, setQueries] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false); // State to control dropdown visibility
+  const [error, setError] = useState(""); // Error state for form validation
+
+  const { logout } = useAuth(); // Accessing the logout function from context
+  const navigate = useNavigate(); // Using navigate for routing
 
   // Assuming the user's email is stored in localStorage after login
-  const loggedUser = localStorage.getItem("user_data"); // Get the logged-in user's email
+  const loggedUser = localStorage.getItem("user_data");
+  const parsedUser = JSON.parse(loggedUser);
+  const loggedUserEmail = parsedUser?.user?.email;
 
-  
-    const parsedUser = JSON.parse(loggedUser);
-  
-
-    const loggedUserEmail = parsedUser.user?.email;
-  
-   
-
-
- 
   useEffect(() => {
     loadQueries();
   }, []);
@@ -30,41 +31,89 @@ function Query() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!query) return;
+    if (!query.trim()) {
+      setError("Query cannot be empty.");
+      return;
+    }
+    if (query.length > 500) {
+      setError("Query cannot exceed 500 characters.");
+      return;
+    }
 
-    // Send the user's email with the query
-    await submitQuery({ text: query, email: loggedUserEmail}); 
+    setError(""); // Clear error message if validation passes
+
+    await submitQuery({ text: query, email: loggedUserEmail });
     setQuery("");
     loadQueries();
   };
 
-  return (
-    <div className="p-5">
-      <h2 className="text-xl font-bold mb-4">Submit a Query</h2>
-      <form onSubmit={handleSubmit} className="mb-4">
-        <textarea
-          className="w-full border p-2"
-          rows="3"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Enter your query..."
-        />
-        <button type="submit" className="bg-blue-500 text-white p-2 mt-2">
-          Submit
-        </button>
-      </form>
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login"); // Navigate to login page after logging out
+  };
 
-      <h3 className="text-lg font-bold mb-2">Your Past Queries</h3>
-      <ul>
-        {queries.map((q) => (
-          <li key={q._id} className="border p-2 my-2">
-            <strong>Your Query:</strong> {q.text}
-            {q.response && (
-              <p className="text-green-600"><strong>Admin Reply:</strong> {q.response}</p>
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown); // Toggle dropdown visibility
+  };
+
+  return (
+    <div>
+      {/* Navbar */}
+      <nav className="navbar">
+        <ul>
+          <h1 className="navbar-logo">ExploreLanka</h1>
+          <li><a href="/userprofile">Home</a></li>
+          <li><a href="/itinerarypage">Itinerary Planner</a></li>
+          <li><a href="/destinations">Destinations</a></li>
+          <li><a href="/query">Queries</a></li>
+          <li><a href="/feedback">Feedback</a></li>
+          <li className="profile-icon" onClick={toggleDropdown}>
+            <img src={DefaultProfilePic} alt="Profile" className="profile-pic" />
+            {showDropdown && ( // Conditionally render dropdown menu
+              <div className="dropdown-menu">
+                <a href="/profile">Profile</a>
+                <a href="/trips">Trips</a>
+                <a href="/write-review">Write a Review</a>
+                <a href="/messages">Messages</a>
+                <button onClick={handleLogout} className="logout-button">Sign Out</button>
+              </div>
             )}
           </li>
-        ))}
-      </ul>
+        </ul>
+      </nav>
+
+      <div className="query-container">
+        <h2 className="query-heading">Submit a Query</h2>
+        <form onSubmit={handleSubmit} className="query-form">
+          <textarea
+            className="query-textarea"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Enter your query..."
+          />
+          {error && <p className="error-message">{error}</p>} {/* Display error message if validation fails */}
+          <button type="submit" className="query-button">
+            Submit
+          </button>
+        </form>
+
+        <h3 className="query-heading">Your Past Queries</h3>
+        <div className="query-list">
+          {queries.map((q) => (
+            <div key={q._id} className="query-item">
+              <strong>Your Query:</strong> {q.text}
+              {q.response && (
+                <p className="admin-reply">
+                  <strong>Admin Reply:</strong> {q.response}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

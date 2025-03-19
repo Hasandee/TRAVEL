@@ -1,0 +1,129 @@
+/* Container Styling */
+.user-management-container {
+    max-width: 90%;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Header Styling */
+.user-management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.user-management-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Back Button Styling */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #3e658e;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.back-button:hover {
+    background-color: #023e8a;
+}
+
+/* Add User Button */
+.user-management-button {
+    background-color: #3e658e;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.user-management-button:hover {
+    background-color: #023e8a;
+}
+
+/* Table Styling */
+.user-management-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.user-management-table th, .user-management-table td {
+    padding: 15px;
+    border: 3px solid #ddd;
+    text-align: left;
+}
+
+.user-management-table th {
+    background-color: #5a6b7b;
+    color: white;
+    font-size: 16px;
+}
+
+.user-management-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.user-management-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Buttons inside Table */
+.user-management-table .ant-btn {
+    margin-right: 5px;
+}
+
+/* Modal Styling */
+.user-management-modal .ant-modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+/* Edit Button */
+.user-management-table .edit-button {
+    background-color: #3e658e; /* Yellow */
+    color: #333;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.user-management-table .edit-button:hover {
+    background-color: #023e8a; /* Darker yellow */
+    transform: scale(1.05);
+}
+
+/* Delete Button */
+.user-management-table .delete-button {
+    background-color: #dc3545; /* Red */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.user-management-table .delete-button:hover {
+    background-color: #c82333; /* Darker red */
+    transform: scale(1.05);
+}

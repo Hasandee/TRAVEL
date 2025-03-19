@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import '../Styles/AdminItineraries.css';  // Importing the custom CSS
 
 function SavedItineraries() {
   const [itineraries, setItineraries] = useState([]);
@@ -26,24 +27,28 @@ function SavedItineraries() {
   }, []);
 
   return (
-    <div style={{ padding: "20px", textAlign: "center" }}>
-      <h2>Saved Itineraries</h2>
-      <button onClick={() => navigate("/profile")} style={{ marginBottom: "20px", padding: "10px 20px", fontSize: "16px" }}>
+    <div className="saved-itineraries-container">
+      <h2 className="page-title">Saved Itineraries</h2>
+      <button onClick={() => navigate("/adminprofile")} className="back-button">
         Back to Profile
       </button>
       {loading ? (
-        <p>Loading...</p>
+        <p className="loading-message">Loading...</p>
       ) : itineraries.length === 0 ? (
-        <p>No saved itineraries yet.</p>
+        <p className="no-itinerary-message">No saved itineraries yet.</p>
       ) : (
-        <ul style={{ listStyle: "none", padding: 0 }}>
+        <div className="itinerary-card-container">
           {itineraries.map((itinerary, index) => (
-            <li key={index} style={{ marginBottom: "15px", padding: "10px", border: "1px solid #ccc", borderRadius: "5px" }}>
-              <strong>Destination:</strong> {itinerary.Preferred_Locations} <br />
-              <strong>Activities:</strong> {itinerary.Activities.join(", ")}
-            </li>
+            <div key={index} className="itinerary-card">
+              <div className="itinerary-card-header">
+                <h4>Destination: {itinerary.Preferred_Locations}</h4>
+              </div>
+              <div className="itinerary-card-body">
+                <strong>Activities:</strong> {itinerary.Activities.join(", ")}
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
