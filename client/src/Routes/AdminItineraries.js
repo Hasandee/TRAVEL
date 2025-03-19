@@ -9,7 +9,7 @@ function SavedItineraries() {
   useEffect(() => {
     const fetchItineraries = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/itinerary");
+        const response = await fetch("http://localhost:8080/api/itinerary/all");
         if (!response.ok) {
           throw new Error("Failed to fetch");
         }

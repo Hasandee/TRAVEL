@@ -9,10 +9,14 @@ function SavedItineraries() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
+  const loggedUser = localStorage.getItem("user_data"); // Get the logged-in user's email
+    const parsedUser = JSON.parse(loggedUser);
+    const loggedUserEmail = parsedUser.user?.email;
+
   useEffect(() => {
     const fetchItineraries = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/itinerary");
+        const response = await fetch(`http://localhost:8080/api/itinerary/${loggedUserEmail}`);
         if (!response.ok) {
           throw new Error("Failed to fetch");
         }

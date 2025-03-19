@@ -24,12 +24,17 @@ const AdminProfile = () => {
     navigate('/adminfeedback');
   };
 
+  const handleSeeUsers = () => {
+    navigate('/usermanagement');
+  };
+
   return (
     <div>
       <h1>Admin Profile</h1>
       <Button onClick={handleSeeItineraries} style={{ margin: '10px' }}>See the Itineraries</Button>
       <Button onClick={handleSeeQueries} style={{ margin: '10px' }}>See the Queries</Button>
       <Button onClick={handleSeeFeedbacks} style={{ margin: '10px' }}>See the Feedbacks</Button>
+      <Button onClick={handleSeeUsers} style={{ margin: '10px' }}>See the Users</Button>
       <Button onClick={handleLogout} style={{ margin: '10px' }}>Logout</Button>
     </div>
   );

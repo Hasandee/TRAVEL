@@ -9,6 +9,15 @@ const Results = () => {
   const recommendation = location.state?.recommendation;
   const [saved, setSaved] = useState(false);
 
+  const loggedUser = localStorage.getItem("user_data"); // Get the logged-in user's email
+    const parsedUser = JSON.parse(loggedUser);
+    const loggedUserEmail = parsedUser.user?.email;
+
+
+    const savingIterniary = {email:loggedUserEmail,...recommendation};
+
+    console.log(savingIterniary)
+
   if (!recommendation) {
     return (
       <div className="page-background">
@@ -30,7 +39,7 @@ const Results = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(recommendation),
+        body: JSON.stringify(savingIterniary),
       });
 
       if (response.ok) {

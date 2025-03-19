@@ -26,6 +26,7 @@ import Query from './Routes/Query';
 import AdminQuery from './Routes/AdminQuery';
 import Feedback from './Routes/Feedback';
 import AdminFeedback from './Routes/AdminFeedback';
+import UserManagement from './Components/UserManagement';
 
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
         <Route path="/adminquery" element={<AdminQuery />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/adminfeedback" element={<AdminFeedback />} />
+        <Route path="/usermanagement" element={<UserManagement />} />
         
 
        </Routes>
